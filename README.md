@@ -63,6 +63,9 @@ sudo systemctl enable redis
 # Install Bun
 curl -fsSL https://bun.sh/install | bash
 
+# Upgrade to Bun Canary (important!)
+bun upgrade --canary
+
 # Reload shell configuration to use Bun
 source ~/.bashrc
 ```
