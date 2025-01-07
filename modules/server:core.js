@@ -10,6 +10,8 @@ const fs = require("fs");
 const Database = require("../db.js");
 const db = new Database('sqlite://prism.db');
 const getPteroUser = require('../handlers/getPteroUser');
+const loadConfig = require("../handlers/config");
+const settings = loadConfig("./config.toml");
 
 const workflowsFilePath = path.join(__dirname, "../storage/workflows.json");
 
@@ -22,8 +24,8 @@ const PrismModule = {
   target_platform: "0.5.0-alpha1",
 };
 
-const PANEL_URL = "https://panel.xeh.sh";
-const API_KEY = "ptlc_2mrapdnagc4e9yeiKLudFrGJg8zEEVqkZPwnTQNmlwG";
+const PANEL_URL = settings.pterodactyl.url;
+const API_KEY = settings.pterodactyl.client_key;
 
 // Middleware for authentication check
 const isAuthenticated = (req, res, next) => {
