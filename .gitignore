@@ -12,3 +12,4 @@ temp/
 *.rdb
 package-lock.json
 config.toml
+.DS_Store
