@@ -24,7 +24,7 @@ const PrismModule = {
   target_platform: "0.5.0-alpha1",
 };
 
-const PANEL_URL = settings.pterodactyl.url;
+const PANEL_URL = settings.pterodactyl.domain;
 const API_KEY = settings.pterodactyl.client_key;
 
 // Middleware for authentication check
