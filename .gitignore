@@ -1,0 +1,14 @@
+node_modules/
+backups/
+logs/
+*.log
+prism.*
+*.db
+*.sqlite
+storage/
+temp/
+*.lockb
+*.lock
+*.rdb
+package-lock.json
+config.toml
