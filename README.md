@@ -77,7 +77,7 @@ cd Prism
 
 2. Install dependencies:
 ```bash
-npm install
+bun install
 ```
 
 3. Create configuration file:
