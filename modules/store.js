@@ -7,7 +7,7 @@ const settings = loadConfig("./config.toml");
 const PrismModule = { 
   "name": "Staking", 
   "api_level": 2,
-  "target_platform": "0.5.0-alpha1" 
+  "target_platform": "0.5.0-alpha2" 
 };
 
 module.exports.PrismModule = PrismModule;

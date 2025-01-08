@@ -13,7 +13,7 @@ const fs = require("fs");
 const PrismModule = {
   name: "server:workflow",
   api_level: 3,
-  target_platform: "0.5.0-alpha1",
+  target_platform: "0.5.0-alpha2",
 };
 
 module.exports.PrismModule = PrismModule;

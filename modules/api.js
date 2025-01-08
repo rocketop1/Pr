@@ -2,7 +2,7 @@ const loadConfig = require("../handlers/config");
 const settings = loadConfig("./config.toml");
 
 /* Ensure platform release target is met */
-const PrismModule = { "name": "API v5", "api_level": 3, "target_platform": "0.5.0-alpha1" };
+const PrismModule = { "name": "API v5", "api_level": 3, "target_platform": "0.5.0-alpha2" };
 
 if (PrismModule.target_platform !== settings.version) {
   console.log('Module ' + PrismModule.name + ' does not support this platform release of Prism. The module was built for platform ' + PrismModule.target_platform + ' but is attempting to run on version ' + settings.version + '.')

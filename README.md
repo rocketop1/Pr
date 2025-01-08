@@ -37,6 +37,7 @@ If you don't do this, Prism can't communicate with your nodes.
 ## Prerequisites
 
 - Bun v1.1.42 or higher
+- Node.js v18+ *(for frontend only, backend runs on Bun)*
 - Redis
 - Nginx
 - SSL certificate (recommended)
@@ -62,6 +63,9 @@ sudo systemctl enable redis
 ```bash
 # Install Bun
 curl -fsSL https://bun.sh/install | bash
+
+# Install Node.js
+# This depends on your system, find how to via https://nodejs.org
 
 # Upgrade to Bun Canary (important!)
 bun upgrade --canary
@@ -90,8 +94,13 @@ cp example_config.toml config.toml
 
 4. Configure your `config.toml` file
 
-5. Start Prism:
+5. Build & Start Prism:
 ```bash
+cd app
+npm install
+npm run build
+cd ../
+
 bun run app.js
 ```
 
@@ -165,9 +174,6 @@ server {
     ssl_session_timeout 1d;
     ssl_session_cache shared:SSL:50m;
     ssl_session_tickets off;
-    
-    # Modern configuration
-    ssl_dhparam /path/to/dhparam.pem;
 }
 ```
 

@@ -14,7 +14,7 @@ name = "Prism" # Website/dashboard name
 # ---------------------------------
 platform_codename = "Adelante"
 platform_level = 120 # channel: stable - 06-01-2025 (Adelante R)
-version = "0.5.0-alpha1"
+version = "0.5.0-alpha2"
 
 # ---------------------------------
 # Additional Settings
