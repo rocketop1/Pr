@@ -62,7 +62,7 @@ const AuthPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Only check CAPTCHA for registration
+    // Only check CAPTCHA for registration when it's enabled
     if (formType === 'register' && captchaConfig.enabled && !captchaToken) {
       setError('Please complete the reCAPTCHA');
       return;
@@ -93,7 +93,7 @@ const AuthPage = () => {
         email,
         ...(formType !== 'reset' && formType !== 'magic' && { password }),
         ...(formType === 'register' && { username }),
-        // Only include CAPTCHA token for registration
+        // Only include CAPTCHA token for registration when it's enabled
         ...(formType === 'register' && captchaConfig.enabled && { recaptchaResponse: captchaToken })
       };
 
@@ -127,7 +127,8 @@ const AuthPage = () => {
       setError('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
-      if (captchaConfig.enabled && formType === 'register') {
+      // only reset CAPTCHA when it's enabled and we're on the register form
+      if (captchaConfig.enabled && formType === 'register' && recaptchaRef.current) {
         recaptchaRef.current.reset();
         setCaptchaToken(null);
       }
@@ -237,7 +238,7 @@ const AuthPage = () => {
 
             <Button 
               type="submit" 
-              className="w-full" 
+              className="w-full"
               disabled={isLoading || (formType === 'register' && captchaConfig.enabled && !captchaToken)}
             >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}

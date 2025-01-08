@@ -8,6 +8,7 @@
 # General Configuration
 # ---------------------------------
 name = "Prism" # Website/dashboard name
+auto_update = true # Automatically update Prism on boot
 
 # ---------------------------------
 # Heliactyl Release Information
