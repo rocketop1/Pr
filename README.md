@@ -63,6 +63,9 @@ sudo systemctl enable redis
 # Install Bun
 curl -fsSL https://bun.sh/install | bash
 
+# Upgrade to Bun Canary (important!)
+bun upgrade --canary
+
 # Reload shell configuration to use Bun
 source ~/.bashrc
 ```
@@ -77,7 +80,7 @@ cd Prism
 
 2. Install dependencies:
 ```bash
-npm install
+bun install
 ```
 
 3. Create configuration file:
