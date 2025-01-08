@@ -74,7 +74,7 @@ class UpdateManager {
   }
 
   async init() {
-    if (this.settings.auto_update) {
+    if (this.settings.auto_update && this.settings.auto_update === true) {
       console.log('Auto-update is enabled - checking for updates...');
       await this.checkForUpdates();
       // Check every 30 minutes
