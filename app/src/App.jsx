@@ -33,6 +33,7 @@ import AccountPage from './pages/Account';
 import AdminOverview from './pages/admin/Overview';
 import Users from './pages/admin/Users';
 import Nodes from './pages/admin/Nodes';
+import Radar from './pages/admin/Radar';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -222,6 +223,7 @@ export default function App() {
             <Route path="/admin/overview" element={<AdminOverview />} />
             <Route path="/admin/users" element={<Users />} />
             <Route path="/admin/nodes" element={<Nodes />} />
+            <Route path="/admin/radar" element={<Radar />} />
           </Route>
 
           {/* Auth route */}

@@ -29,7 +29,8 @@ import {
   Square,
   Server,
   Store,
-  Coffee
+  Coffee,
+  ShieldBan
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import {
@@ -335,6 +336,11 @@ export default function MainLayout() {
       icon: <Workflow className="w-4 h-4" />,
       label: 'Nodes',
       path: '/admin/nodes'
+    },
+    {
+      icon: <ShieldBan className="w-4 h-4" />,
+      label: 'Radar',
+      path: '/admin/radar'
     }
   ];
 

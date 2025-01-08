@@ -57,7 +57,7 @@ redisClient.on('connect', () => {
 // Version information
 const VERSION = "0.5.0-alpha2";
 const PLATFORM_CODENAME = "Adelante";
-const PLATFORM_LEVEL = 'release 120';
+const PLATFORM_LEVEL = 'release 121';
 
 console.log(`Prism ${VERSION} (${PLATFORM_CODENAME} ${PLATFORM_LEVEL})`);
 
