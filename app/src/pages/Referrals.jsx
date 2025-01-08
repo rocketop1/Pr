@@ -45,17 +45,16 @@ const ReferralsPage = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <HelpCircle className="h-5 w-5" />
-            How Referrals Work
+            Information
           </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             <div className="bg-neutral-800/20 rounded-lg p-4">
               <h3 className="font-medium flex items-center gap-2 mb-2">
-                <Gift className="h-5 w-5" />
                 Rewards
               </h3>
-              <ul className="space-y-2 text-neutral-300">
+              <ul className="space-y-2 text-sm text-neutral-300">
                 <li>• When someone uses your code, you get <span className="text-yellow-500">80 coins</span></li>
                 <li>• They receive <span className="text-yellow-500">250 coins</span> for using a referral code</li>
                 <li>• Each user can only claim one referral code</li>
