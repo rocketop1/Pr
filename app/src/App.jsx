@@ -32,6 +32,7 @@ import Tickets from './pages/SupportTickets';
 import AccountPage from './pages/Account';
 
 import AdminOverview from './pages/admin/Overview';
+import AdminTickets from './pages/admin/Tickets';
 import Users from './pages/admin/Users';
 import Nodes from './pages/admin/Nodes';
 import Radar from './pages/admin/Radar';
@@ -226,6 +227,7 @@ export default function App() {
             <Route path="/admin/users" element={<Users />} />
             <Route path="/admin/nodes" element={<Nodes />} />
             <Route path="/admin/radar" element={<Radar />} />
+            <Route path="/admin/tickets" element={<AdminTickets />} />
           </Route>
 
           {/* Auth route */}
