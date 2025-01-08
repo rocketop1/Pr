@@ -62,7 +62,8 @@ const AuthPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (captchaConfig.enabled && !captchaToken) {
+    // Only check CAPTCHA for registration
+    if (formType === 'register' && captchaConfig.enabled && !captchaToken) {
       setError('Please complete the reCAPTCHA');
       return;
     }
@@ -92,7 +93,8 @@ const AuthPage = () => {
         email,
         ...(formType !== 'reset' && formType !== 'magic' && { password }),
         ...(formType === 'register' && { username }),
-        ...(captchaConfig.enabled && { recaptchaResponse: captchaToken })
+        // Only include CAPTCHA token for registration
+        ...(formType === 'register' && captchaConfig.enabled && { recaptchaResponse: captchaToken })
       };
 
       const response = await fetch(endpoint, {
@@ -125,7 +127,7 @@ const AuthPage = () => {
       setError('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
-      if (captchaConfig.enabled) {
+      if (captchaConfig.enabled && formType === 'register') {
         recaptchaRef.current.reset();
         setCaptchaToken(null);
       }
@@ -222,7 +224,8 @@ const AuthPage = () => {
               </div>
             )}
 
-            {captchaConfig.enabled && (
+            {/* Only show CAPTCHA for registration */}
+            {formType === 'register' && captchaConfig.enabled && (
               <div className="flex justify-center py-2">
                 <ReCAPTCHA
                   ref={recaptchaRef}
@@ -232,7 +235,11 @@ const AuthPage = () => {
               </div>
             )}
 
-            <Button type="submit" className="w-full" disabled={isLoading || (captchaConfig.enabled && !captchaToken)}>
+            <Button 
+              type="submit" 
+              className="w-full" 
+              disabled={isLoading || (formType === 'register' && captchaConfig.enabled && !captchaToken)}
+            >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {formType === 'signin' ? 'Sign in' :
                formType === 'register' ? 'Create account' :
@@ -245,7 +252,7 @@ const AuthPage = () => {
             <div className="mt-4 space-y-2">
               <Button
                 variant="outline"
-                className="w-full"
+                className="w-full hidden"
                 onClick={() => setFormType('magic')}
               >
                 <Mail className="mr-2 h-4 w-4" />
@@ -262,7 +269,7 @@ const AuthPage = () => {
                 </Button>
                 <Button
                   variant="link"
-                  className="px-0 text-muted-foreground"
+                  className="px-0 text-muted-foreground hidden"
                   onClick={() => setFormType('reset')}
                 >
                   Forgot password?
