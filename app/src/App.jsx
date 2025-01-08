@@ -28,6 +28,7 @@ import NotFound from './pages/NotFound';
 import AFKPage from './pages/coins/AFKPage';
 import Store from './pages/coins/Store';
 import ReferralsPage from './pages/Referrals';
+import Tickets from './pages/SupportTickets';
 import AccountPage from './pages/Account';
 
 import AdminOverview from './pages/admin/Overview';
@@ -217,6 +218,7 @@ export default function App() {
             <Route path="/coins/afk" element={<AFKPage />} />
             <Route path="/coins/store" element={<Store />} />
             <Route path="/referrals" element={<ReferralsPage />} />
+            <Route path="/tickets" element={<Tickets />} />
             <Route path="/account" element={<AccountPage />} />
 
             {/* Admin routes */}

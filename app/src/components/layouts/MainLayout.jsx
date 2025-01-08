@@ -16,6 +16,7 @@ import {
   SendToBack,
   Globe,
   Network,
+  MessageCircleQuestion,
   LogOut,
   Settings,
   User,
@@ -24,6 +25,7 @@ import {
   Archive,
   Cog,
   MoreHorizontal,
+  Ticket,
   Power,
   RotateCw,
   Square,
@@ -341,6 +343,11 @@ export default function MainLayout() {
       icon: <ShieldBan className="w-4 h-4" />,
       label: 'Radar',
       path: '/admin/radar'
+    },
+    {
+      icon: <Ticket className="w-4 h-4" />,
+      label: 'Tickets',
+      path: '/admin/tickets'
     }
   ];
 
@@ -412,6 +419,18 @@ export default function MainLayout() {
               <Link to="/referrals" className="flex items-center gap-2">
                 <Tags className="w-4 h-4" />
                 <span>Referrals</span>
+              </Link>
+            </Button>
+
+            <Button
+              variant={location.pathname === '/tickets' ? "secondary" : "ghost"}
+              size="sm"
+              className={`${location.pathname === '/tickets' ? "" : "text-neutral-400"} focus:ring-0 focus-visible:ring-0 pl-4 focus-visible:ring-offset-0`}
+              asChild
+            >
+              <Link to="/tickets" className="flex items-center gap-2">
+                <MessageCircleQuestion className="w-4 h-4" />
+                <span>Support</span>
               </Link>
             </Button>
 
