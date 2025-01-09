@@ -278,11 +278,12 @@ module.exports.load = async function (app, db) {
   app.post("/auth/reset-password-request", async (req, res) => {
     const { email, recaptchaResponse } = req.body;
 
-    if (!email || !recaptchaResponse) {
+    if (!email) {
       return res.status(400).json({ error: "Email and reCAPTCHA response are required" });
     }
 
     // Verify reCAPTCHA
+     if (settings.api.client.recaptcha.enabled === true) {
     const recaptchaVerification = await fetch('https://www.google.com/recaptcha/api/siteverify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -294,7 +295,7 @@ module.exports.load = async function (app, db) {
     if (!recaptchaResult.success) {
         return res.status(400).json({ error: "reCAPTCHA verification failed" });
     }
-
+     }
     const user = await db.get(`user-${email}`);
     if (!user) {
       return res.json({ message: "If the email exists, a reset link will be sent" });
@@ -370,7 +371,7 @@ module.exports.load = async function (app, db) {
     if (!email || !recaptchaResponse) {
       return res.status(400).json({ error: "Email and reCAPTCHA response are required" });
     }
-
+ if (settings.api.client.recaptcha.enabled === true) {
     // Verify reCAPTCHA
     const recaptchaVerification = await fetch('https://www.google.com/recaptcha/api/siteverify', {
         method: 'POST',
@@ -383,7 +384,7 @@ module.exports.load = async function (app, db) {
     if (!recaptchaResult.success) {
         return res.status(400).json({ error: "reCAPTCHA verification failed" });
     }
-
+ }
     const user = await db.get(`user-${email}`);
     if (!user) {
       return res.json({ message: "If the email exists, a magic link will be sent" });
