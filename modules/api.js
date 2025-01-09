@@ -5,7 +5,7 @@ const settings = loadConfig("./config.toml");
 const PrismModule = {
     "name": "API v5",
     "api_level": 3,
-    "target_platform": "0.5.0-alpha2"
+    "target_platform": "0.5.0-alpha3"
 };
 
 if (PrismModule.target_platform !== settings.version) {

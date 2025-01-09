@@ -11,7 +11,7 @@ const { isAuthenticated } = require("./server:core.js");
 const PrismModule = {
   name: "server:users_legacy",
   api_level: 3,
-  target_platform: "0.5.0-alpha2",
+  target_platform: "0.5.0-alpha3",
 };
 
 module.exports.PrismModule = PrismModule;

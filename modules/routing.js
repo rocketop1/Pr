@@ -6,7 +6,7 @@ const mime = require('mime-types');
 const PrismModule = {
   name: "React Panel",
   api_level: 3,
-  target_platform: "0.5.0-alpha2"
+  target_platform: "0.5.0-alpha3"
 };
 
 const PROCESSABLE_EXTENSIONS = ['.html', '.js', '.css', '.json'];
