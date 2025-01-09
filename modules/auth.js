@@ -122,6 +122,7 @@ module.exports.load = async function (app, db) {
     }
 
     // Verify reCAPTCHA
+    if (settings.api.client.recaptcha.enabled === true) {
     const recaptchaVerification = await fetch('https://www.google.com/recaptcha/api/siteverify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -133,7 +134,7 @@ module.exports.load = async function (app, db) {
     if (!recaptchaResult.success) {
         return res.status(400).json({ error: "reCAPTCHA verification failed" });
     }
-
+    }
     // Generate a unique user ID
     const userId = uuidv4();
 
