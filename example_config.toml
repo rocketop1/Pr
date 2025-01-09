@@ -54,14 +54,6 @@ accountSwitcher = true
   from = "noreply@example.com"
   app_name = "Prism"
 
-  [api.client.recaptcha]
-  # ---------------------------------
-  # reCAPTCHA API Key
-  # ---------------------------------
-  enabled = true
-  site_key = "your_recaptcha_site_key"
-  secret_key = "your_recaptcha_secret_key"
-
   [api.client.api] # Prism API version 5
   enabled = true
   code = "YOUR_API_KEY"
