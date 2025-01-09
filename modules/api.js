@@ -30,16 +30,6 @@ module.exports.load = async function(app, db) {
         }
     });
 
-    app.get("/api/captcha", async (req, res) => {
-        // Let Prism know if reCAPTCHA is enabled and if so, what the site key is
-        let captcha_enabled = settings.api.client.recaptcha.enabled;
-        let captcha_site_key = settings.api.client.recaptcha.site_key;
-        res.json({
-            captcha_enabled,
-            captcha_site_key
-        });
-    });
-
     app.get("/api/coins", async (req, res) => {
         if (!req.session.userinfo) {
             return res.status(401).json({

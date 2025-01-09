@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Loader2, Mail, AlertCircle, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -7,49 +7,17 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { useToast } from '@/hooks/use-toast';
-import ReCAPTCHA from 'react-google-recaptcha';
 
 const AuthPage = () => {
   const [formType, setFormType] = useState('signin');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [captchaConfig, setCaptchaConfig] = useState({ enabled: false, site_key: null });
-  const [captchaToken, setCaptchaToken] = useState(null);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const recaptchaRef = React.useRef(null);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
-
-  useEffect(() => {
-    const fetchCaptchaConfig = async () => {
-      try {
-        const response = await fetch('/api/captcha');
-        const data = await response.json();
-        setCaptchaConfig({
-          enabled: data.captcha_enabled,
-          site_key: data.captcha_site_key
-        });
-      } catch (err) {
-        console.error('Failed to fetch captcha config:', err);
-      }
-    };
-
-    fetchCaptchaConfig();
-  }, []);
-
-  useEffect(() => {
-    setCaptchaToken(null);
-    if (recaptchaRef.current) {
-      recaptchaRef.current.reset();
-    }
-  }, [formType]);
-
-  const handleCaptchaChange = (token) => {
-    setCaptchaToken(token);
-  };
 
   const validatePassword = (password) => {
     return password.length >= 12 && 
@@ -61,12 +29,6 @@ const AuthPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Only check CAPTCHA for registration when it's enabled
-    if (formType === 'register' && captchaConfig.enabled && !captchaToken) {
-      setError('Please complete the reCAPTCHA');
-      return;
-    }
 
     if ((formType === 'signin' || formType === 'register') && !password) {
       setError('Password is required');
@@ -92,9 +54,7 @@ const AuthPage = () => {
       const payload = {
         email,
         ...(formType !== 'reset' && formType !== 'magic' && { password }),
-        ...(formType === 'register' && { username }),
-        // Only include CAPTCHA token for registration when it's enabled
-        ...(formType === 'register' && captchaConfig.enabled && { recaptchaResponse: captchaToken })
+        ...(formType === 'register' && { username })
       };
 
       const response = await fetch(endpoint, {
@@ -127,11 +87,6 @@ const AuthPage = () => {
       setError('An error occurred. Please try again.');
     } finally {
       setIsLoading(false);
-      // only reset CAPTCHA when it's enabled and we're on the register form
-      if (captchaConfig.enabled && formType === 'register' && recaptchaRef.current) {
-        recaptchaRef.current.reset();
-        setCaptchaToken(null);
-      }
     }
   };
 
@@ -225,21 +180,10 @@ const AuthPage = () => {
               </div>
             )}
 
-            {/* Only show CAPTCHA for registration */}
-            {formType === 'register' && captchaConfig.enabled && (
-              <div className="flex justify-center py-2">
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey={captchaConfig.site_key}
-                  onChange={handleCaptchaChange}
-                />
-              </div>
-            )}
-
             <Button 
               type="submit" 
               className="w-full"
-              disabled={isLoading || (formType === 'register' && captchaConfig.enabled && !captchaToken)}
+              disabled={isLoading}
             >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {formType === 'signin' ? 'Sign in' :
