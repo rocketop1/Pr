@@ -92,9 +92,9 @@ module.exports.load = async function (app, db) {
   
   // Registration route
   app.post("/auth/register", rateLimit, async (req, res) => {
-    const { username, email, password, recaptchaResponse } = req.body;
+    const { username, email, password } = req.body;
 
-    if (!username || !email || !password || !recaptchaResponse) {
+    if (!username || !email || !password) {
       return res.status(400).json({ error: "Missing required fields" });
     }
 
@@ -121,20 +121,6 @@ module.exports.load = async function (app, db) {
       return res.status(409).json({ error: "Username already taken" });
     }
 
-    // Verify reCAPTCHA
-    if (settings.api.client.recaptcha.enabled === true) {
-    const recaptchaVerification = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `secret=${settings.api.client.recaptcha.secret_key}&response=${recaptchaResponse}`
-    });
-
-    const recaptchaResult = await recaptchaVerification.json();
-
-    if (!recaptchaResult.success) {
-        return res.status(400).json({ error: "reCAPTCHA verification failed" });
-    }
-    }
     // Generate a unique user ID
     const userId = uuidv4();
 
@@ -276,26 +262,12 @@ module.exports.load = async function (app, db) {
 
   // Password reset request route
   app.post("/auth/reset-password-request", async (req, res) => {
-    const { email, recaptchaResponse } = req.body;
+    const { email } = req.body;
 
     if (!email) {
-      return res.status(400).json({ error: "Email and reCAPTCHA response are required" });
+      return res.status(400).json({ error: "Email is required" });
     }
 
-    // Verify reCAPTCHA
-     if (settings.api.client.recaptcha.enabled === true) {
-    const recaptchaVerification = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `secret=${settings.api.client.recaptcha.secret_key}&response=${recaptchaResponse}`
-    });
-
-    const recaptchaResult = await recaptchaVerification.json();
-
-    if (!recaptchaResult.success) {
-        return res.status(400).json({ error: "reCAPTCHA verification failed" });
-    }
-     }
     const user = await db.get(`user-${email}`);
     if (!user) {
       return res.json({ message: "If the email exists, a reset link will be sent" });
@@ -366,25 +338,12 @@ module.exports.load = async function (app, db) {
 
   // Magic link login request
   app.post("/auth/magic-link", rateLimit, async (req, res) => {
-    const { email, recaptchaResponse } = req.body;
+    const { email } = req.body;
 
-    if (!email || !recaptchaResponse) {
-      return res.status(400).json({ error: "Email and reCAPTCHA response are required" });
+    if (!email) {
+      return res.status(400).json({ error: "Email is required" });
     }
- if (settings.api.client.recaptcha.enabled === true) {
-    // Verify reCAPTCHA
-    const recaptchaVerification = await fetch('https://www.google.com/recaptcha/api/siteverify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: `secret=${settings.api.client.recaptcha.secret_key}&response=${recaptchaResponse}`
-    });
 
-    const recaptchaResult = await recaptchaVerification.json();
-
-    if (!recaptchaResult.success) {
-        return res.status(400).json({ error: "reCAPTCHA verification failed" });
-    }
- }
     const user = await db.get(`user-${email}`);
     if (!user) {
       return res.json({ message: "If the email exists, a magic link will be sent" });
