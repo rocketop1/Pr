@@ -15,7 +15,7 @@ auto_update = false # Automatically update Prism on boot
 # ---------------------------------
 platform_codename = "Adelante"
 platform_level = 120 # channel: stable - 06-01-2025 (Adelante R)
-version = "0.5.0-alpha3"
+version = "0.5.0-alpha4"
 
 # ---------------------------------
 # Additional Settings

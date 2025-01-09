@@ -55,7 +55,7 @@ redisClient.on('connect', () => {
 });
 
 // Version information
-const VERSION = "0.5.0-alpha3";
+const VERSION = "0.5.0-alpha4";
 const PLATFORM_CODENAME = "Adelante";
 const PLATFORM_LEVEL = 'release 121';
 
