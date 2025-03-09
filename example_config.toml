@@ -7,7 +7,7 @@
 # ---------------------------------
 # General Configuration
 # ---------------------------------
-name = "Prism" # Website/dashboard name
+name = "FlexaHost" # Website/dashboard name
 auto_update = false # Automatically update Prism on boot
 
 # ---------------------------------
@@ -26,17 +26,17 @@ database = "prism.db"
 # Pterodactyl Settings
 # ---------------------------------
 [pterodactyl]
-domain = "https://panel.example.com" # Format: https://panel.domain.tld with no / on the end
-key = "ptla_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" # Find this under Admin -> Application API
-client_key = "ptlc_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" # Create an admin account and generate from Account -> API Keys
+domain = "https://panel.flexahost.in" # Format: https://panel.domain.tld with no / on the end
+key = "ptla_KiPzFKUG2LZ51fVjKBIEHoDlqhZRBf2bSkSvHyszO3Z" # Find this under Admin -> Application API
+client_key = "ptlc_6uAPSU999NqGXcc24JTmwKSAAhknk7LY3abqBzML4S9" # Create an admin account and generate from Account -> API Keys
 
 # ---------------------------------
 # Webserver Configuration
 # ---------------------------------
 [website]
-port = 25_001 # Default: 25_001
+port = 8080 # Default: 25_001
 secret = "CHANGE_THIS_SECRET" # Change this - do not run Prism in production with the default secret
-domain = "https://example.com"
+domain = "https://45.45.238.163"
 
 # ---------------------------------
 # API Client Settings
